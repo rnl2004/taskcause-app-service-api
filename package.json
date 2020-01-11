@@ -1,0 +1,33 @@
+{
+  "name": "taskcause-app-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node app.js --presets es2015",
+    "test": "standard and node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "app-root-path": "^3.0.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql": "^2.17.1",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1",
+    "bluebird": "^3.7.2",
+    "dateformat": "^3.0.3",
+    "dotenv": "^8.2.0",
+    "morgan": "^1.9.1",
+    "node-zookeeper-client": "^1.1.0",
+    "nodemon": "^2.0.2",
+    "standard": "^14.3.1",
+    "winston": "^3.2.1"
+  }
+}
