@@ -21,6 +21,10 @@ const getConnection = (cb) => {
 			password: db_password,
 			debug: db_server_debug
 		})
+		if (connectionPool) {
+			const msg = `Connected to database.`
+			console.log(msg)
+		}
 	}
 	if (connectionPool) {
 		connectionPool.getConnection((err, connection) => {
@@ -29,7 +33,7 @@ const getConnection = (cb) => {
 				console.log(msg)
 				return cb(err)
 			}
-			const msg = `Status: Successfully connected to database with thread id ${connection.threadId}`
+			const msg = `Connection pool with thread id: ${connection.threadId}`
 			console.log(msg)
 			cb(null, connection)
 		})
