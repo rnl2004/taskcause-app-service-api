@@ -4,13 +4,14 @@ import env from '../commons/environment'
 let connectionPool = null
 
 const getConnection = (cb) => {
-	const db_server = env.datatabase().server
-	const db_server_port = env.datatabase().port
-	const db_server_debug = env.datatabase().server_debug
-	const database = env.datatabase().database
-	const db_user = env.datatabase().username
-	const db_password = env.datatabase().password
-	const db_connection_limit = env.datatabase().connection_limit
+	const db_server = env.database().server
+	const db_server_port = env.database().port
+	const db_server_debug = env.database().server_debug
+	const database = env.database().database
+	const db_user = env.database().username
+	const db_password = env.database().password
+	const db_connection_limit = env.database().connection_limit
+	const db_wait_for_connections = env.database().waitForConnections
 	if (!connectionPool) {
 		connectionPool = mysql.createPool({
 			connectionLimit: db_connection_limit,
@@ -19,7 +20,8 @@ const getConnection = (cb) => {
 			database: database,
 			user: db_user,
 			password: db_password,
-			debug: db_server_debug
+			debug: db_server_debug,
+			waitForConnections: db_wait_for_connections
 		})
 		if (connectionPool) {
 			const msg = `Connected to database.`
