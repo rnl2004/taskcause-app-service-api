@@ -18,6 +18,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(morgan('combined', { stream: winstonLogger.stream }))
 app.use(serverRoot, organizationsRoute)
 
-http.createServer(app).listen(env.server().port, env.server().hostname)
+http.createServer(app).listen(env.server().port)
 console.log(`Started running on HTTP server ${env.server().hostname} PORT ${env.server().port}`)
 
