@@ -1,7 +1,7 @@
-import Promise from 'bluebird'
-import dateFormat from 'dateformat'
+const Promise = require('promise')
+const dateFormat = require('dateformat')
 
-const commonUtils = function() {
+const commonUtils = function () {
 
 	this.getCurrentDateTime = function () {
 		const now = new Date()
@@ -29,6 +29,5 @@ const commonUtils = function() {
 			})
 		})
 	}
-
 }
 module.exports = new commonUtils()

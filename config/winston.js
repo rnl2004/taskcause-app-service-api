@@ -1,5 +1,5 @@
-const appRoot = require('app-root-path');
-const winston = require('winston');
+const appRoot = require('app-root-path')
+const winston = require('winston')
 
 const options = {
     file: {

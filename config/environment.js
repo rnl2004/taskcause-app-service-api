@@ -3,7 +3,7 @@ const environment = function() {
 	const deployment_environment = process.env.DEPLOYMENT_ENVIRONMENT;
 
 	this.server = function () {
-		return { environment: deployment_environment, server: 'localhost', port: 3000 }
+		return { environment: deployment_environment, hostname: 'localhost', port: 3000 }
 	}
 
 	this.database = function () {

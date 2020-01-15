@@ -1,7 +1,6 @@
-import router from '../config/express_router'
-import authenticate from '../config/authenticate'
-import organizationsService from '../services/organizations_service'
-import commonUtils from '../commons/utils'
+const router = require('../config/express_router')
+
+const organizationsService = require('../services/organizations_service');
 
 router.post('/organizations', (req, res) => {
 	const organization = req.body
@@ -18,7 +17,6 @@ router.put(`/organizations`, (req, res) => {
 })
 
 router.get(`/organizations/:id`, (req, res) => {
-	const data = req.body
 	const organizationId = req.params.id
 	organizationsService.getOrganizationTransactional(organizationId).then((result) => {
 		res.send(result)
@@ -26,10 +24,9 @@ router.get(`/organizations/:id`, (req, res) => {
 })
 
 router.get(`/organizations`, (req, res) => {
-	const data = req.body
 	organizationsService.getOrganizationsTransactional().then((result) => {
 		res.send(result)
 	})
 })
 
-export default router
+module.exports = router

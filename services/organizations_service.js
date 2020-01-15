@@ -1,15 +1,15 @@
-import database from '../config/database'
-import Promise from 'promise'
-import commonUtils from '../commons/utils'
+const database = require('../config/database_connector')
+const Promise = require('promise')
+const commonUtils = require('../commons/utils')
 
-const organizationService = function() {
+const organizationsService = function () {
 
-	this.createOrganizationTransactional = function(organization) {
+	this.createOrganizationTransactional = (organization) => {
 		organization.created_date = commonUtils.getCurrentDateTime().now
 		organization.updated_date = commonUtils.getCurrentDateTime().now
 		return new Promise((resolve, reject) => {
 			database.getConnection((err, connection) => {
-				connection.beginTransaction(function (err) {
+				connection.beginTransaction((err) => {
 					if (err) {
 						reject(err)
 						connection.release()
@@ -28,12 +28,12 @@ const organizationService = function() {
 		})
 	}
 
-	this.updateOrganizationTransactional = function(organization) {
+	this.updateOrganizationTransactional = (organization) => {
 		organization.created_date = commonUtils.formatDateTime(organization.created_date).toTimestamp
 		organization.updated_date = commonUtils.getCurrentDateTime().now
 		return new Promise((resolve, reject) => {
 			database.getConnection((err, connection) => {
-				connection.beginTransaction(function (err) {
+				connection.beginTransaction((err) => {
 					if (err) {
 						reject(err)
 						connection.release()
@@ -52,10 +52,10 @@ const organizationService = function() {
 		})
 	}
 
-	this.getOrganizationTransactional = function(organizationId) {
+	this.getOrganizationTransactional = (organizationId) => {
 		return new Promise((resolve, reject) => {
 			database.getConnection((err, connection) => {
-				connection.beginTransaction(function (err) {
+				connection.beginTransaction((err) => {
 					if (err) {
 						reject(err)
 						connection.release()
@@ -74,10 +74,10 @@ const organizationService = function() {
 		})
 	}
 
-	this.getOrganizationsTransactional = function() {
+	this.getOrganizationsTransactional = () => {
 		return new Promise((resolve, reject) => {
 			database.getConnection((err, connection) => {
-				connection.beginTransaction(function (err) {
+				connection.beginTransaction((err) => {
 					if (err) {
 						reject(err)
 						connection.release()
@@ -96,13 +96,13 @@ const organizationService = function() {
 		})
 	}
 
-	this.createOrganization = function (connection, organization) {
-		return new Promise(function (resolve, reject) {
+	this.createOrganization = (connection, organization) => {
+		return new Promise((resolve, reject) => {
 			const sql = 'INSERT INTO tbl_manage_organization SET ?'
 			connection.escape(organization)
-			connection.query(sql, organization, function (err, result) {
+			connection.query(sql, organization, (err, result) => {
 				if (err) {
-					connection.rollback(function () {
+					connection.rollback(() => {
 						reject(err.message)
 						connection.release()
 					})
@@ -113,13 +113,13 @@ const organizationService = function() {
 		})
 	}
 
-	this.updateOrganization = function (connection, organization) {
-		return new Promise(function (resolve, reject) {
+	this.updateOrganization = (connection, organization) => {
+		return new Promise((resolve, reject) => {
 			const sql = 'UPDATE tbl_manage_organization SET ? where organization_id = ?'
 			connection.escape(organization)
-			connection.query(sql, [organization, organization.organization_id], function (err, result) {
+			connection.query(sql, [organization, organization.organization_id], (err, result) => {
 				if (err) {
-					connection.rollback(function () {
+					connection.rollback(() => {
 						reject(err.message)
 						connection.release()
 					})
@@ -130,13 +130,13 @@ const organizationService = function() {
 		})
 	}
 
-	this.getOrganizationById = function (connection, organizationId) {
-		return new Promise(function (resolve, reject) {
+	this.getOrganizationById = (connection, organizationId) => {
+		return new Promise((resolve, reject) => {
 			const sql = 'SELECT * FROM tbl_manage_organization where organization_id = ?'
 			connection.escape(organizationId)
-			connection.query(sql, [organizationId], function (err, result) {
+			connection.query(sql, [organizationId], (err, result) => {
 				if (err) {
-					connection.rollback(function () {
+					connection.rollback(() => {
 						reject(err.message)
 						connection.release()
 					})
@@ -147,12 +147,12 @@ const organizationService = function() {
 		})
 	}
 
-	this.getOrganizations = function (connection) {
-		return new Promise(function (resolve, reject) {
+	this.getOrganizations = (connection) => {
+		return new Promise((resolve, reject) => {
 			const sql = 'SELECT * FROM tbl_manage_organization'
-			connection.query(sql, [], function (err, result) {
+			connection.query(sql, [], (err, result) => {
 				if (err) {
-					connection.rollback(function () {
+					connection.rollback(() => {
 						reject(err.message)
 						connection.release()
 					})
@@ -162,6 +162,6 @@ const organizationService = function() {
 			})
 		})
 	}
-
 }
-module.exports = new organizationService()
+
+module.exports = new organizationsService()
