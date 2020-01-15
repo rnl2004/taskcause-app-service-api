@@ -1,5 +1,5 @@
 import database from '../config/database'
-import Promise from 'bluebird'
+import Promise from 'promise'
 import commonUtils from '../commons/utils'
 
 const organizationService = function() {

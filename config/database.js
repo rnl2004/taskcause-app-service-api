@@ -1,5 +1,5 @@
 import mysql from 'mysql'
-import env from '../commons/environment'
+import env from './environment'
 
 let connectionPool = null
 
